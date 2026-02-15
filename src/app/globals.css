@@ -1,98 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  /* Color Palette - HSL */
-  --background: 222 47% 11%; /* Dark Blue/Grey */
-  --foreground: 210 40% 98%; /* Off-white */
+  /* Urban Editorial Palette */
+  --background: #1e5bff; /* Primary Background Blue */
+  --foreground: #f5f5f5; /* Headline Text White */
 
-  --primary: 250 100% 70%; /* Vibrant Violet */
-  --primary-foreground: 210 40% 98%;
+  --accent-red: #f04a2a; /* Accent Orange-Red Block */
+  --accent-yellow: #ffc400; /* Lightning Bolt Yellow */
 
-  --secondary: 180 100% 50%; /* Cyan/Teal */
-  --secondary-foreground: 222 47% 11%;
+  --grid-line: #ffd84d; /* Grid Lines Yellow */
+  --shadow: #111111; /* Drop Shadow Black */
 
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20.2% 65.1%;
+  --text-secondary: #a7c4ff; /* Secondary Text Light Blue */
+  --icon-star: #ffcc33; /* Star Icon Yellow */
 
-  --accent: 217 33% 17%;
-  --accent-foreground: 210 40% 98%;
-
-  --border: 217 33% 17%;
-  --input: 217 33% 17%;
-  --ring: 250 100% 70%;
-
-  --radius: 0.5rem;
+  /* Semantic Aliases */
+  --primary: var(--accent-yellow);
+  --primary-foreground: var(--shadow);
+  --card: var(--background);
+  --card-foreground: var(--foreground);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@theme {
+  --font-anton: "Anton", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent-red: var(--accent-red);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-grid-line: var(--grid-line);
+  --color-shadow: var(--shadow);
+  --color-text-secondary: var(--text-secondary);
+  --color-icon-star: var(--icon-star);
 }
 
-html,
+/* Base Styles */
 body {
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-inter), sans-serif;
-  line-height: 1.5;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-anton), sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.2s ease;
+/* Urban Editorial Utilities */
+.text-shadow-hard {
+  text-shadow: 4px 4px 0px var(--shadow);
 }
 
-a:hover {
-  color: hsl(var(--primary));
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+.box-shadow-hard {
+  box-shadow: 6px 6px 0px var(--shadow);
 }
