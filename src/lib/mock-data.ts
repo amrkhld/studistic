@@ -168,9 +168,9 @@ export const featureImportances: FeatureImportance[] = [
 ];
 
 export const riskDistribution: RiskDistribution[] = [
-    { label: 'High Performer', count: 5073, percentage: 75.6, color: '#2ea043' },
-    { label: 'Medium Risk', count: 1459, percentage: 21.8, color: '#d29922' },
-    { label: 'At Risk', count: 175, percentage: 2.6, color: '#f04a2a' },
+    { label: 'High Performer', count: 5073, percentage: 75.6, color: '#34d399' },
+    { label: 'Medium Risk', count: 1459, percentage: 21.8, color: '#fbbf24' },
+    { label: 'At Risk', count: 175, percentage: 2.6, color: '#f87171' },
 ];
 
 export const recommendations: Recommendation[] = [
@@ -240,17 +240,17 @@ export function getRiskBadgeClass(risk: string): string {
 
 export function getRiskColor(risk: string): string {
     switch (risk) {
-        case 'High Performer': return '#2ea043';
-        case 'Medium Risk': return '#d29922';
-        case 'At Risk': return '#f04a2a';
-        default: return '#8b949e';
+        case 'High Performer': return '#34d399';
+        case 'Medium Risk': return '#fbbf24';
+        case 'At Risk': return '#f87171';
+        default: return 'rgba(200,210,255,0.4)';
     }
 }
 
 export function getGradeColor(grade: string): string {
-    if (grade.startsWith('A')) return '#2ea043';
-    if (grade.startsWith('B')) return '#1e5bff';
-    if (grade.startsWith('C')) return '#d29922';
-    if (grade.startsWith('D')) return '#f04a2a';
-    return '#8b949e';
+    if (grade.startsWith('A')) return '#34d399';
+    if (grade.startsWith('B')) return '#38bdf8';
+    if (grade.startsWith('C')) return '#fbbf24';
+    if (grade.startsWith('D')) return '#f87171';
+    return 'rgba(200,210,255,0.4)';
 }
