@@ -1,64 +1,92 @@
-import React from 'react';
+'use client';
+
+import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  LayoutDashboard, 
-  User, 
-  ListTodo, 
-  GraduationCap, 
-  PieChart, 
-  ArrowRightLeft, 
-  LogOut 
+import { usePathname } from 'next/navigation';
+import Logo from '@/assets/general/logo.png';
+import {
+  LayoutDashboard,
+  User,
+  KanbanSquare,
+  GraduationCap,
+  PieChart,
+  ArrowRightLeft,
+  LogOut
 } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { name: 'DASHBOARD', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'PROFILE', href: '/profile', icon: User },
-  { name: 'TO-STUDY', href: '/to-study', icon: ListTodo },
-  { name: 'GRADES', href: '/grades', icon: GraduationCap },
-  { name: 'PERCENTAGES', href: '/percentages', icon: PieChart },
-  { name: 'COMPARISONS', href: '/comparisons', icon: ArrowRightLeft },
+  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Profile', href: '/profile', icon: User },
+  { name: 'To-Study', href: '/to-study', icon: KanbanSquare },
+  { name: 'Grades', href: '/grades', icon: GraduationCap },
+  { name: 'Percentages', href: '/percentages', icon: PieChart },
+  { name: 'Comparisons', href: '/comparisons', icon: ArrowRightLeft },
 ];
 
 export function Sidebar() {
-  return (
-    <aside className="w-64 h-full bg-background border-r-4 border-grid-line flex flex-col justify-between p-6 relative z-50">
-      {/* Brand Label */}
-      <div className="mb-12">
-        <div className="bg-accent-red text-white text-xs font-bold px-3 py-1 inline-block uppercase tracking-widest transform -rotate-2 box-shadow-hard mb-4">
-          Fashion Brand.
-        </div>
-        <h1 className="text-5xl font-anton text-foreground leading-[0.85] tracking-tight">
-          STUDISTIC<br/>
-          <span className="text-accent-yellow">VIBES.</span>
-        </h1>
-      </div>
+  const pathname = usePathname();
 
-      {/* Navigation */}
-      <nav className="flex-1 space-y-6">
-        {NAV_ITEMS.map((item) => (
-          <Link 
-            key={item.name} 
-            href={item.href}
-            className="group flex items-center gap-4 text-xl font-anton text-text-secondary hover:text-foreground transition-colors duration-200"
-          >
-            <div className="p-2 border-2 border-transparent group-hover:border-accent-yellow group-hover:bg-accent-yellow group-hover:text-background transition-all">
-              <item.icon size={24} />
-            </div>
-            <span className="tracking-wide">{item.name}</span>
-          </Link>
-        ))}
-      </nav>
+  return (
+    <aside className="w-[240px] min-w-[240px] h-full flex flex-col justify-between py-6 px-4 relative"
+      style={{
+        background: 'var(--background-secondary)',
+        borderRight: '1px solid var(--border)',
+      }}
+    >
+      {/* Logo */}
+      <div>
+        <div className="mb-8 px-2">
+          <Image
+            src={Logo}
+            alt="Studistic Logo"
+            width={180}
+            height={50}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
+
+        {/* Navigation */}
+        <nav className="space-y-1">
+          {NAV_ITEMS.map((item) => {
+            const isActive = pathname === item.href || (item.href === '/dashboard' && pathname === '/');
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+                style={{
+                  color: isActive ? 'var(--foreground)' : 'var(--text-secondary)',
+                  background: isActive ? 'rgba(255, 196, 0, 0.1)' : 'transparent',
+                  borderLeft: isActive ? '3px solid var(--accent-yellow)' : '3px solid transparent',
+                }}
+              >
+                <item.icon size={18} style={{ color: isActive ? 'var(--accent-yellow)' : 'var(--text-secondary)' }} />
+                <span>{item.name}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
 
       {/* Footer / Logout */}
-      <div className="mt-8 pt-8 border-t-4 border-grid-line">
-         <button className="w-full flex items-center justify-between bg-shadow text-white p-4 hover:bg-accent-red transition-colors duration-200 group">
-            <span className="font-anton text-xl tracking-wider">LOGOUT</span>
-            <LogOut size={20} className="group-hover:translate-x-1 transition-transform" />
-         </button>
+      <div style={{ borderTop: '1px solid var(--border)' }} className="pt-4">
+        <button
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+          style={{ color: 'var(--text-secondary)' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'var(--accent-red)';
+            e.currentTarget.style.background = 'rgba(240, 74, 42, 0.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--text-secondary)';
+            e.currentTarget.style.background = 'transparent';
+          }}
+        >
+          <LogOut size={18} />
+          <span>Logout</span>
+        </button>
       </div>
-      
-      {/* Decorative Grid Lines Overlay (Optional visual flair) */}
-      <div className="absolute top-0 right-0 w-[1px] h-full bg-grid-line opacity-20 pointer-events-none"></div>
     </aside>
   );
 }

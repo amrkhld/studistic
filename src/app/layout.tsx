@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-anton" });
 
 export const metadata: Metadata = {
-  title: "Studistic | Urban Editorial Dashboard",
-  description: "A premium student productivity platform with high-contrast design.",
+  title: "Studistic — Student Performance Analytics",
+  description: "AI-powered student performance prediction and analytics platform.",
 };
 
 export default function RootLayout({
@@ -18,12 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${anton.variable}`}>
-       <body className="font-sans antialiased bg-background text-foreground h-screen flex overflow-hidden">
-        {/* Sidebar Navigation */}
+       <body className="antialiased h-screen flex overflow-hidden" style={{ fontFamily: 'var(--font-inter), Inter, sans-serif' }}>
         <Sidebar />
-        
-        {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 relative">
+        <main className="flex-1 overflow-y-auto">
            {children}
         </main>
       </body>

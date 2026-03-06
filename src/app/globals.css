@@ -2,23 +2,29 @@
 
 :root {
   /* Urban Editorial Palette */
-  --background: #1e5bff; /* Primary Background Blue */
-  --foreground: #f5f5f5; /* Headline Text White */
+  --background: #0d1117;
+  --background-secondary: #161b22;
+  --foreground: #f0f6fc;
 
-  --accent-red: #f04a2a; /* Accent Orange-Red Block */
-  --accent-yellow: #ffc400; /* Lightning Bolt Yellow */
+  --accent-blue: #1e5bff;
+  --accent-red: #f04a2a;
+  --accent-yellow: #ffc400;
+  --accent-green: #2ea043;
+  --accent-orange: #d29922;
 
-  --grid-line: #ffd84d; /* Grid Lines Yellow */
-  --shadow: #111111; /* Drop Shadow Black */
+  --grid-line: #ffd84d;
+  --shadow: #010409;
 
-  --text-secondary: #a7c4ff; /* Secondary Text Light Blue */
-  --icon-star: #ffcc33; /* Star Icon Yellow */
+  --text-secondary: #8b949e;
+  --text-muted: #484f58;
+  --icon-star: #ffcc33;
 
   /* Semantic Aliases */
   --primary: var(--accent-yellow);
   --primary-foreground: var(--shadow);
-  --card: var(--background);
+  --card: var(--background-secondary);
   --card-foreground: var(--foreground);
+  --border: #30363d;
 }
 
 @theme {
@@ -26,28 +32,139 @@
   --font-inter: "Inter", sans-serif;
 
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
   --color-foreground: var(--foreground);
+  --color-accent-blue: var(--accent-blue);
   --color-accent-red: var(--accent-red);
   --color-accent-yellow: var(--accent-yellow);
+  --color-accent-green: var(--accent-green);
+  --color-accent-orange: var(--accent-orange);
   --color-grid-line: var(--grid-line);
   --color-shadow: var(--shadow);
   --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
   --color-icon-star: var(--icon-star);
+  --color-border: var(--border);
 }
 
 /* Base Styles */
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-anton), sans-serif;
+  font-family: var(--font-inter), sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 /* Urban Editorial Utilities */
 .text-shadow-hard {
-  text-shadow: 4px 4px 0px var(--shadow);
+  text-shadow: 3px 3px 0px var(--shadow);
 }
 
 .box-shadow-hard {
-  box-shadow: 6px 6px 0px var(--shadow);
+  box-shadow: 4px 4px 0px var(--shadow);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 196, 0, 0.4); }
+  50% { box-shadow: 0 0 20px 4px rgba(255, 196, 0, 0.15); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; opacity: 0; }
+.stagger-2 { animation-delay: 0.2s; opacity: 0; }
+.stagger-3 { animation-delay: 0.3s; opacity: 0; }
+.stagger-4 { animation-delay: 0.4s; opacity: 0; }
+.stagger-5 { animation-delay: 0.5s; opacity: 0; }
+.stagger-6 { animation-delay: 0.6s; opacity: 0; }
+
+/* Card base style */
+.card {
+  background: var(--background-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.3s ease, transform 0.2s ease;
+}
+.card:hover {
+  border-color: var(--accent-yellow);
+  transform: translateY(-2px);
+}
+
+/* Metric bar */
+.metric-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--text-muted);
+  overflow: hidden;
+}
+.metric-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Risk badge styles */
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.risk-high-performer {
+  background: rgba(46, 160, 67, 0.15);
+  color: #3fb950;
+  border: 1px solid rgba(46, 160, 67, 0.3);
+}
+.risk-medium {
+  background: rgba(210, 153, 34, 0.15);
+  color: #d29922;
+  border: 1px solid rgba(210, 153, 34, 0.3);
+}
+.risk-at-risk {
+  background: rgba(240, 74, 42, 0.15);
+  color: #f04a2a;
+  border: 1px solid rgba(240, 74, 42, 0.3);
 }
